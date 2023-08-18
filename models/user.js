@@ -1,4 +1,3 @@
-const { userInfo } = require('os')
 const mongoose = require('../db/connection')
 
 const userSchema = new mongoose.Schema({

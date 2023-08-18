@@ -5,7 +5,12 @@ const bcrypt = require('bcrypt')
 
 // LOGIN
 router.get('/login', (req, res) => {
+    console.log('hello!')
     res.render('auth/login')
+})
+
+router.get('/profile', (req,res) => {
+    console.log('put profile render page')
 })
 
 router.post('/login', async (req, res) => {
@@ -37,6 +42,7 @@ router.post('/signup', async (req, res) => {
             res.send(newUser)
 
         });
+        res.redirect('/schedule')
     }
 });
 

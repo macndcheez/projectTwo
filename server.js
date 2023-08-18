@@ -2,7 +2,8 @@ const express = require('express')
 const app = express();
 const port = 3000;
 const expressLayouts = require('express-ejs-layouts')
-const authRoutes = require('./controllers/authController')
+const authController = require('./controllers/authController')
+const eventController = require('./controllers/eventController')
 const session = require('express-session');
 
 app.set('view engine', 'ejs');
@@ -13,11 +14,26 @@ app.use(expressLayouts);
 
 app.use(session({ secret: "yerrr", cookie: {maxAge: 3600000}}))
 app.use(express.json());
-app.use(authRoutes)
+app.use(authController);
+app.use(eventController);
 
-app.get('/schedule', (req, res) => {
+app.get('/', (req, res) => {
     res.render('home')
 })
+
+// own middleware for checking logged in
+app.use((req, res, next) => {
+    console.log(req.session)
+    if (!req.session.userId){
+        res.redirect('/login')
+        return
+    }
+
+    next();
+});
+
+app.use('/events', eventController );
+
 
 app.listen(port, () => {
     console.log('ello listening in on port: ', port)
