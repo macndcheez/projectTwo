@@ -2,7 +2,7 @@ const mongoose = require('../db/connection')
 
 const scheduleSchema = new mongoose.Schema({
     event: {type: String, required: true},
-    time: {},
+    time: {type: Number, required: true},
     date: {type: String, required: true},
     note: String,
 })
