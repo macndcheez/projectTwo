@@ -3,7 +3,7 @@ const mongoose = require('../db/connection')
 const eventSchema = new mongoose.Schema ({
     _id: {
         type: "UUID",
-        default: () => randomUUID();
+        default: () => randomUUID()
     },
     name: {type: String, required: true},
     creator: {type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true},
