@@ -1,4 +1,29 @@
-<form action="/events" method="POST">
-    <input type="text" name="title" id="">
+<%- include ('layout') %>
 
+<h1>Create New Event</h1>
+
+<form action="/events/new" method="POST">
+    <label for="eventName">Event Name:</label>
+    <input type="text" id="eventName" name="eventName" required>
+   
+    <label for="calendarDuration">Available Dates:</label>
+    <input type="text" id="calendarDuration" name="calendarDuration" required>
+   
+    <label for="timezone">Timezone:</label>
+    <select name="timezone" id="timezone" required>
+        <option value="" disabled>Select a Timezone</option>
+    </select>
+    <button type="submit">Create Event</button>
 </form>
+
+<script>
+    const tzSelect = document.getElementById('timezone')
+    const timezones = moment.tz.names();
+
+    timezones.forEach( timezone => {
+        const option = document.createElement('option')
+        option.value = timezone;
+        option.text = timezone;
+        tzSelect.appendChild(option);
+    });
+</script>

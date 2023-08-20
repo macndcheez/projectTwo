@@ -44,7 +44,7 @@ app.get('/', (req, res) => {
 // })
 
 
-app.use('/events', eventController );
+app.use('/events', eventController);
 
 
 app.listen(port, () => {

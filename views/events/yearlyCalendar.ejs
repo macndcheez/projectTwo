@@ -1,13 +1,8 @@
-<%- include ('../layout') %>
-<!DOCTYPE html>
-<html lang='en'>
-  <head>
-    <meta charset='utf-8' />
-    <script defer src="https://cdn.jsdelivr.net/npm/@fullcalendar/core/main.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid/main.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/@fullcalendar/interaction/main.js"></script>
-    <script defersrc='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js'></script>
-    <script>
+<script defer src="https://cdn.jsdelivr.net/npm/@fullcalendar/core/main.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid/main.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/@fullcalendar/interaction/main.js"></script>
+<script defer src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js'></script>
+<script>
 
       document.addEventListener('DOMContentLoaded', function() {
         let calendarEl = document.getElementById('calendar');
@@ -17,11 +12,10 @@
         calendar.render();
       });
 
-    </script>
-  </head>
-  <body>
+</script>
+  
     <div id='calendar'></div>
-  </body>
-</html>
+  
+
 
 
