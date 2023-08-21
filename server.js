@@ -19,7 +19,8 @@ app.use(express.json());
 app.use(authController);
 // app.use(eventController);
 
-app.get('/', (req, res) => {
+app.get('/home', (req, res) => {
+    console.log("yellooww")
     res.render('home')
 })
 

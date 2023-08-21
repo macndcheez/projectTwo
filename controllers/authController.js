@@ -23,7 +23,7 @@ router.post('/login', async (req, res) => {
             if(result){
                 req.session.userId = userToLogin._id
                 req.session.name = userToLogin.name;
-                res.redirect('/event')
+                res.redirect('/events')
             } else {
                 res.send('no can do ')
             }
@@ -42,7 +42,7 @@ router.post('/signup', async (req, res) => {
             res.send(newUser)
 
         });
-        res.redirect('/schedule')
+        res.redirect('/events')
     }
 });
 

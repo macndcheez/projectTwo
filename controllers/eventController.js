@@ -19,19 +19,15 @@ router.get('/', async (req, res) => {
 
 router.get('/calendar/yearly', async (req,res) => {
         const events = await Event.find();
-        res.render('events/yearlyCalendar', { events })
+        res.render('events/yearlyCalendar.ejs', { events })
     
 })
 
-router.post('/new', async (req, res) => {
-    try {
-        const newEvent = await Event.create(req.body);
-        res.render('events/new', { newEvent })
-
-    } catch {
-        res.send('noo good')
-    }
-  
+router.get('/new', async (req, res) => {
+    let events = await Event.find();
+    res.render('events/new.ejs', {
+        events
+    })
 })
 
 // router.get('/seed', async (req, res) => {

@@ -1,4 +1,4 @@
-<%- include ('layout') %>
+
 
 <h1>Create New Event</h1>
 
@@ -16,14 +16,3 @@
     <button type="submit">Create Event</button>
 </form>
 
-<script>
-    const tzSelect = document.getElementById('timezone')
-    const timezones = moment.tz.names();
-
-    timezones.forEach( timezone => {
-        const option = document.createElement('option')
-        option.value = timezone;
-        option.text = timezone;
-        tzSelect.appendChild(option);
-    });
-</script>
