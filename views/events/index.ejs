@@ -3,8 +3,17 @@
 <script defer src="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid/main.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/@fullcalendar/interaction/main.js"></script>
 <script defer src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js'></script>
-<h1>Start planning  <%= eventName %>!</h1>
+<h1>Start planning <%= eventName %>!</h1>
 
+<ul>
+    <% events.forEach( event => { %>
+        <li>
+            <%= event.eventName %>
+            <a href="/events/edit/<%= event.uniqueUrl %>?calendarDuration=<%= event.calendarDuration %>&eventName=<%= event.eventName %>"> Edit </a>
+            <a href="/events/delete/<%= event.uniqueUrl %>?calendarDuration=<%= event.calendarDuration %>&eventName=<%= event.eventName %>"> Delete </a>
+        </li>
+   <% }) %>
+</ul>
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -38,4 +47,6 @@
 </script>
 
 <div id="calendar"></div>
+
+
 

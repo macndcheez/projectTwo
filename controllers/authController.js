@@ -5,12 +5,14 @@ const bcrypt = require('bcrypt')
 
 // LOGIN
 router.get('/login', (req, res) => {
-    console.log('hello!')
     res.render('auth/login')
 })
 
-router.get('/profile', (req,res) => {
-    console.log('put profile render page')
+router.get('/profile', async (req, res) => {
+    const user = await User.findOne({ userId: req.params.userId});
+    res.render('auth/profile', {
+        user
+    })
 })
 
 router.post('/login', async (req, res) => {
@@ -23,7 +25,7 @@ router.post('/login', async (req, res) => {
             if(result){
                 req.session.userId = userToLogin._id
                 req.session.name = userToLogin.name;
-                res.redirect('/events/new')
+                res.redirect('/events/userEvents')
             } else {
                 res.send('no can do ')
             }
@@ -55,5 +57,17 @@ router.get('/logout', (req, res) => {
     req.session.destroy();
     res.redirect('/');
 })
+
+const requireLogin = (req, res, next) => {
+    if (!req.session.userId) {
+        return res.redirect('/login');
+    }
+    next();
+};
+
+// router.get('/profile/:userId', requireLogin, async (req,res) => {
+//     const user = await User.findOne({ userId: req.params.userId});
+//     console.log(user)
+// })
 
 module.exports = router

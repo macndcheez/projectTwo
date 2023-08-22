@@ -1,0 +1,12 @@
+<h1>Your Events</h1>
+
+
+<ul>
+    <% userEvents.forEach( event => { %>
+        <li>
+            <h4><a href="/events/<%= event.uniqueUrl %>"><%= event.eventName%></a></h4>
+            <a href="/events/edit/<%= event.uniqueUrl %>"> Edit </a>
+            <a href="/events/delete/<%= event._id %>" data-method="DELETE"> Delete </a>
+        </li>
+   <% }) %>
+</ul>

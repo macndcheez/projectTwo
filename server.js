@@ -5,6 +5,7 @@ const expressLayouts = require('express-ejs-layouts')
 const authController = require('./controllers/authController')
 const eventController = require('./controllers/eventController')
 const session = require('express-session');
+const methodOverride = require('method-override')
 
 // calendar stuffs
 const {Calendar} = require('@fullcalendar/core')
@@ -12,6 +13,7 @@ const dayGridPlugin = require('@fullcalendar/daygrid')
 const interactionPlugin = require('@fullcalendar/interaction')
 app.set('view engine', 'ejs');
 
+app.use(methodOverride('_method'));
 app.use(express.static('public'));
 app.use(express.urlencoded({extended: true}));
 app.use(expressLayouts);
@@ -33,15 +35,15 @@ app.get('/calendar/yearly', (req,res) => {
 
 // own middleware for checking logged in
 app.use((req, res, next) => {
-
     console.log(req.session)
     if (!req.session.userId){
         res.redirect('/login')
         return
     }
-
     next();
 });
+
+
 
 
 

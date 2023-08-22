@@ -1,0 +1,16 @@
+<h1>Edit event, <%=event.eventName %></h1>
+
+<form action="/events/edit/<%= event.uniqueUrl %>?calendarDuration=<%=event.calendarDuration%>&eventName=<%=event.eventName%>" method="POST">
+    <label for="eventName">Event Name:</label>
+    <input type="text" id="eventName" name="eventName" value="<%= event.eventName %>" required> <br>
+   
+    <label for="calendarDuration">Month Duration:</label>
+    <select name="calendarDuration" id="calendarDuration"  required>
+        <option value="3" <%= event.calendarDuration === 3 ? 'selected' : ''%>>3</option>
+        <option value="6" <%= event.calendarDuration === 6 ? 'selected' : ''%>>6</option>
+        <option value="12" <%= event.calendarDuration === 12 ? 'selected' : ''%>>12</option>
+        
+    </select> <br>
+
+    <button type="submit">Edit Event</button>
+</form>

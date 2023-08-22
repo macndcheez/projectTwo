@@ -12,12 +12,12 @@ const dayGridPlugin = require('@fullcalendar/daygrid')
 const interactionPlugin = require('@fullcalendar/interaction')
 
 
-router.get('/', async (req, res) => {
-     let events = await Event.find()
-     res.render('events/index', {
-        events
-     })
-})
+// router.get('/', async (req, res) => {
+//      let events = await Event.find()
+//      res.render('events/index', {
+//         events
+//      })
+// })
 
 router.get('/new', async (req, res) => {
     let events = await Event.find();
@@ -26,8 +26,15 @@ router.get('/new', async (req, res) => {
     })
 })
 
-router.get('/new-schedule', (req,res) => {
-    res.render('events/new-schedule');
+router.get('/edit/:eventId', async (req,res) => {
+    const event = await Event.findOne({ uniqueUrl: req.params.eventId})
+    res.render('events/edit', {event})
+})
+
+router.get('/userEvents', async (req, res) => {
+    const userId = req.session.userId;
+    const userEvents = await Event.find({ user: req.session.userId });
+    res.render('events/userEvents', { userEvents })
 })
 
 router.post('/new', async (req, res) => {
@@ -46,6 +53,7 @@ router.post('/new', async (req, res) => {
         calendarDuration: durationMonths,
         eventCreatedAt: new Date(),
         uniqueUrl: eventId,
+        user: req.session.userId
     });
 
     await newEvent.save();
@@ -54,22 +62,48 @@ router.post('/new', async (req, res) => {
     res.redirect(`/events/${eventId}?calendarDuration=${durationMonths}&eventName=${eventName}`)
 });
 
-router.post('/new-schedule', async (req, res) => {
-    const {event, time, date, note } = req.body;
-    await Schedule.create({ event, time, date, note });
-    res.redirect(`/events/${eventId}?calendarDuration=${durationMonths}&eventName=${eventName}`)
+router.delete('/delete/:eventId', async (req, res) => {
+    const eventIdDelete = req.params.eventId;
+
+    const eventToDelete = await Event.findOne(eventIdDelete)
+
+    await eventToDelete.remove();
+    res.redirect('/events/userEvents')
 })
 
+router.post('/edit/:eventId', async (req, res) => {
+    const event = await Event.findOne({ uniqueUrl: req.params.eventId})
+    if (!event){
+        return res.send('no good')
+    }
+    
+    event.eventName = req.body.eventName;
+    event.calendarDuration = req.body.calendarDuration
+
+    await event.save();
+    res.redirect(`/events/${event.eventId}?calendarDuration=${event.calendarDuration}&eventName=${event.eventName}`)
+})
+// router.post('/new-schedule', async (req, res) => {
+//     const {event, time, date, note } = req.body;
+//     await Schedule.create({ event, time, date, note });
+//     res.redirect(`/events/${eventId}?calendarDuration=${durationMonths}&eventName=${eventName}`)
+// })
+
 router.get('/:eventId', async (req, res) => {
+    let events = await Event.find();
     // const eventId = req.params.eventId;
     const calendarDuration = req.query.eventId;
     const eventName = req.query.eventName;
     console.log(eventName)
     res.render('events/index', {
         calendarDuration,
-        eventName
+        eventName,
+        events
     })
 })
+
+
+
 
 module.exports = router;
 
