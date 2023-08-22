@@ -41,7 +41,7 @@ router.post('/new', async (req, res) => {
     let eventId = nanoid()
 
 
-    res.redirect(`/events/${eventId}?calendarDuration=${durationMonths}`)
+    res.redirect(`/events/${eventId}?calendarDuration=${durationMonths}&eventName=${eventName}`)
 });
 
 // router.get('/seed', async (req, res) => {
@@ -57,9 +57,12 @@ router.post('/new', async (req, res) => {
 
 router.get('/:eventId', async (req, res) => {
     // const eventId = req.params.eventId;
-    const calendarDuration = req.params.eventId;
+    const calendarDuration = req.query.eventId;
+    const eventName = req.query.eventName;
+    console.log(eventName)
     res.render('events/index', {
-        calendarDuration
+        calendarDuration,
+        eventName
     })
 })
 

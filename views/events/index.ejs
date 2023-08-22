@@ -1,9 +1,9 @@
+<link rel="stylesheet" href="/public/style.css">
 <script defer src="https://cdn.jsdelivr.net/npm/@fullcalendar/core/main.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid/main.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/@fullcalendar/interaction/main.js"></script>
 <script defer src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js'></script>
-
-<h1>Start planning your event!</h1>
+<h1>Start planning  <%= eventName %>!</h1>
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -25,9 +25,11 @@
         let calendar = new FullCalendar.Calendar(calendarEl, {
             headerToolBar: {center: 'dayGridMonth, timeGridWeek'},
             initialView: initialView,
+            height: 'auto',
+
             validRange: {
                 start: currentDate,
-                end: new Date(currentDate.getFullYear(), currentDate.getMonth() + calendarDuration)
+                end: new Date(currentDate.getFullYear(), currentDate.getMonth() + calendarDuration + 1)
             }
         })
         calendar.render();

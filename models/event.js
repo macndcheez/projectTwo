@@ -3,6 +3,7 @@ const mongoose = require('../db/connection')
 const eventSchema = new mongoose.Schema ({
     eventName: {type: String, required: true},
     calendarDuration: {type: Number, required: true},
+    eventCreatedAt: Date,
 })
 
 const Event = new mongoose.model('Event', eventSchema);
