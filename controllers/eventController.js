@@ -3,8 +3,8 @@ const app = express();
 const router = express.Router();
 const User = require('../models/user')
 const Event = require('../models/event')
+const Schedule = require('../models/schedule')
 const {customAlphabet} = require('nanoid');
-
 
 // calendar stuffs
 const {Calendar} = require('@fullcalendar/core')
@@ -26,34 +26,39 @@ router.get('/new', async (req, res) => {
     })
 })
 
+router.get('/new-schedule', (req,res) => {
+    res.render('events/new-schedule');
+})
+
 router.post('/new', async (req, res) => {
 
     const {eventName, calendarDuration} = req.body
     const durationMonths = parseInt(calendarDuration)
+    
+    const nanoid = customAlphabet(
+        '01234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz', 
+        5
+    );
+    const eventId = nanoid();
 
-    const newEvent = await Event.create({
+    const newEvent = new Event({
         eventName, 
         calendarDuration: durationMonths,
-        eventCreatedAt: new Date()
+        eventCreatedAt: new Date(),
+        uniqueUrl: eventId,
     });
 
-    const nanoid = customAlphabet('01234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz', 5);
-    let eventId = nanoid()
+    await newEvent.save();
 
 
     res.redirect(`/events/${eventId}?calendarDuration=${durationMonths}&eventName=${eventName}`)
 });
 
-// router.get('/seed', async (req, res) => {
-//     await Event.delete({});
-//     let seededEvents = await Event.create([
-//         {
-//         eventName: "fall 2023 south bay pals calendar",
-//         calendarDuration: "August - "
-
-//         }
-//     ])
-// })
+router.post('/new-schedule', async (req, res) => {
+    const {event, time, date, note } = req.body;
+    await Schedule.create({ event, time, date, note });
+    res.redirect(`/events/${eventId}?calendarDuration=${durationMonths}&eventName=${eventName}`)
+})
 
 router.get('/:eventId', async (req, res) => {
     // const eventId = req.params.eventId;

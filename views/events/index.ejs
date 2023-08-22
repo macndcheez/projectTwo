@@ -5,6 +5,7 @@
 <script defer src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js'></script>
 <h1>Start planning  <%= eventName %>!</h1>
 
+
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         let calendarEl = document.getElementById('calendar');
@@ -23,7 +24,6 @@
         }
 
         let calendar = new FullCalendar.Calendar(calendarEl, {
-            headerToolBar: {center: 'dayGridMonth, timeGridWeek'},
             initialView: initialView,
             height: 'auto',
 
@@ -38,3 +38,4 @@
 </script>
 
 <div id="calendar"></div>
+
