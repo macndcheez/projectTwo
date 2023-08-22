@@ -1,4 +1,5 @@
-# Project Two - Scheduling App - Free
+# Project Two - Scheduling Web App - Free
+## Web app designed to help users plan and manage their events/schedules! 
 
 ## Deployed Site
 https://free-lrig.onrender.com
