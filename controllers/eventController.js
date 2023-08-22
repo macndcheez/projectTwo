@@ -62,12 +62,11 @@ router.post('/new', async (req, res) => {
     res.redirect(`/events/${eventId}?calendarDuration=${durationMonths}&eventName=${eventName}`)
 });
 
-router.delete('/delete/:eventId', async (req, res) => {
+router.get('/delete/:eventId', async (req, res) => {
     const eventIdDelete = req.params.eventId;
 
-    const eventToDelete = await Event.findById(eventIdDelete)
+    const eventToDelete = await Event.findByIdAndDelete(eventIdDelete)
 
-    await eventToDelete.remove();
     res.redirect('/events/userEvents')
 })
 

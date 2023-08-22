@@ -74,3 +74,11 @@
 //         </li>
 //    <% }) %>
 // </ul>
+
+
+
+
+
+
+// <a href="/events/edit/<%= event.uniqueUrl %>"> Edit </a>
+// <a href="/events/delete/<%= event._id %>" data-method="DELETE"> Delete </a>

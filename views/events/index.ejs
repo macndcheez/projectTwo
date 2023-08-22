@@ -1,8 +1,5 @@
-<link rel="stylesheet" href="/public/style.css">
-<script defer src="https://cdn.jsdelivr.net/npm/@fullcalendar/core/main.js"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid/main.js"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/@fullcalendar/interaction/main.js"></script>
-<script defer src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js'></script>
+<link rel="stylesheet" href="/style.css">
+
 <h1>Start planning <%= eventName %>!</h1>
 
 <a href="/events/userEvents">Back</a>
@@ -27,7 +24,8 @@
 
         let calendar = new FullCalendar.Calendar(calendarEl, {
             initialView: initialView,
-            height: 'auto',
+            height: '100%',
+
 
             validRange: {
                 start: currentDate,
