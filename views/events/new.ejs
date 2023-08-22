@@ -1,18 +1,63 @@
 
 
+<script defer src="https://cdn.jsdelivr.net/npm/@fullcalendar/core/main.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid/main.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/@fullcalendar/interaction/main.js"></script>
+<script defer src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js'></script>
+
+<!-- calendar thing -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        let calendarEl = document.getElementById('calendar');
+        let calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth'
+        });
+        calendar.render();
+    });
+
+    
+
+    document.querySelector('form').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const duration = document.getElementById('calendarDuration').value;
+        let view;
+
+        const monthAdd = parseInt(duration);
+        const endDate = new Date();
+        endDate.setMonth(endDate.getMonth() + monthAdd);
+        view = {start: new Date(), end: endDate }
+
+        const calendarEl = document.getElementById('calendar');
+        const calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: view,
+        });
+        calendar.render();
+
+    });
+</script>
+
+<div id='calendar'></div>
+
+<br>
+
+<!-- actual form for event -->
 <h1>Create New Event</h1>
+
+<br>
 
 <form action="/events/new" method="POST">
     <label for="eventName">Event Name:</label>
-    <input type="text" id="eventName" name="eventName" required>
+    <input type="text" id="eventName" name="eventName" required> <br>
    
-    <label for="calendarDuration">Available Dates:</label>
-    <input type="text" id="calendarDuration" name="calendarDuration" required>
-   
-    <label for="timezone">Timezone:</label>
-    <select name="timezone" id="timezone" required>
-        <option value="" disabled>Select a Timezone</option>
-    </select>
+    <label for="calendarDuration">Month Duration:</label>
+    <select name="calendarDuration" id="calendarDuration" required>
+        <option value="3">3</option>
+        <option value="6">6</option>
+        <option value="12">12</option>
+        
+    </select> <br>
+
     <button type="submit">Create Event</button>
 </form>
 

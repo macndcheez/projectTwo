@@ -3,11 +3,14 @@ const app = express();
 const router = express.Router();
 const User = require('../models/user')
 const Event = require('../models/event')
+const {customAlphabet} = require('nanoid');
+
 
 // calendar stuffs
 const {Calendar} = require('@fullcalendar/core')
 const dayGridPlugin = require('@fullcalendar/daygrid')
 const interactionPlugin = require('@fullcalendar/interaction')
+
 
 router.get('/', async (req, res) => {
      let events = await Event.find()
@@ -17,11 +20,7 @@ router.get('/', async (req, res) => {
 })
 
 
-router.get('/calendar/yearly', async (req,res) => {
-        const events = await Event.find();
-        res.render('events/yearlyCalendar.ejs', { events })
-    
-})
+
 
 router.get('/new', async (req, res) => {
     let events = await Event.find();
@@ -29,6 +28,24 @@ router.get('/new', async (req, res) => {
         events
     })
 })
+
+router.post('/new', async (req, res) => {
+
+    const {eventName, calendarDuration} = req.body
+    const durationMonths = parseInt(calendarDuration)
+
+    const newEvent = await Event.create({
+        eventName, 
+        calendarDuration: durationMonths,
+        eventCreatedAt: new Date()
+    });
+
+    const nanoid = customAlphabet('01234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz', 5);
+    let eventId = nanoid()
+
+
+    res.redirect(`/events/${eventId}`)
+});
 
 // router.get('/seed', async (req, res) => {
 //     await Event.delete({});
