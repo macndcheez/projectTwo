@@ -65,7 +65,7 @@ router.post('/new', async (req, res) => {
 router.delete('/delete/:eventId', async (req, res) => {
     const eventIdDelete = req.params.eventId;
 
-    const eventToDelete = await Event.findOne(eventIdDelete)
+    const eventToDelete = await Event.findById(eventIdDelete)
 
     await eventToDelete.remove();
     res.redirect('/events/userEvents')
