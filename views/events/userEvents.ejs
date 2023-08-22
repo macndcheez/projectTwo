@@ -4,9 +4,10 @@
 <ul>
     <% userEvents.forEach( event => { %>
         <li>
-            <h4><a href="/events/<%= event.uniqueUrl %>"><%= event.eventName%></a></h4>
+            <h4><a href="/events/<%= event.uniqueUrl %>?calendarDuration=<%= event.calendarDuration %>&eventName=<%= event.eventName %>"><%= event.eventName%></a></h4>
             <a href="/events/edit/<%= event.uniqueUrl %>"> Edit </a>
-            <a href="/events/delete/<%= event._id %>" data-method="DELETE"> Delete </a>
+            <a href="/events/delete/<%= event.eventId %>" data-method="DELETE"> Delete </a>
         </li>
    <% }) %>
 </ul>
+

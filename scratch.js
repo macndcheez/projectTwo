@@ -65,3 +65,12 @@
 // <div id="calendar"></div>
 
 
+// <ul>
+//     <% events.forEach( event => { %>
+//         <li>
+//             <%= event.eventName %>
+//             <a href="/events/edit/<%= event.uniqueUrl %>?calendarDuration=<%= event.calendarDuration %>&eventName=<%= event.eventName %>"> Edit </a>
+//             <a href="/events/delete/<%= event.uniqueUrl %>?calendarDuration=<%= event.calendarDuration %>&eventName=<%= event.eventName %>"> Delete </a>
+//         </li>
+//    <% }) %>
+// </ul>
