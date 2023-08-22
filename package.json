@@ -12,5 +12,15 @@
     "mongoose": "^7.4.3",
     "nanoid": "^3.3.6",
     "shortid": "^2.2.16"
-  }
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "name": "project2",
+  "description": "scheduling web app to use for events!",
+  "version": "1.0.0",
+  "main": "server.js",
+  "devDependencies": {},
+  "author": "",
+  "license": "ISC"
 }
