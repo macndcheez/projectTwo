@@ -29,7 +29,7 @@ Possible Names:
 - EJS, Javascript, CSS, HTML
 - FullCalendar.io
 
-##### Icebox
+### Icebox
 - still have to implement calendar scheduling while in specific event, FullCalendar already has it implemented in its plugin
 - some of my routing is still a little funky, so need to clean that up
 
