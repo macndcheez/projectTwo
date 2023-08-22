@@ -5,46 +5,10 @@
 <script defer src="https://cdn.jsdelivr.net/npm/@fullcalendar/interaction/main.js"></script>
 <script defer src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js'></script>
 
-<!-- calendar thing -->
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        let calendarEl = document.getElementById('calendar');
-        let calendar = new FullCalendar.Calendar(calendarEl, {
-            initialView: 'dayGridMonth'
-        });
-        calendar.render();
-    });
-
-    
-
-    document.querySelector('form').addEventListener('submit', function(event) {
-        event.preventDefault();
-
-        const duration = document.getElementById('calendarDuration').value;
-        let view;
-
-        const monthAdd = parseInt(duration);
-        const endDate = new Date();
-        endDate.setMonth(endDate.getMonth() + monthAdd);
-        view = {start: new Date(), end: endDate }
-
-        const calendarEl = document.getElementById('calendar');
-        const calendar = new FullCalendar.Calendar(calendarEl, {
-            initialView: view,
-        });
-        calendar.render();
-
-    });
-</script>
-
-<div id='calendar'></div>
-
-<br>
-
 <!-- actual form for event -->
 <h1>Create New Event</h1>
 
-<br>
+
 
 <form action="/events/new" method="POST">
     <label for="eventName">Event Name:</label>
@@ -60,4 +24,28 @@
 
     <button type="submit">Create Event</button>
 </form>
+
+<br>
+<br>
+
+<!-- calendar thing -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        let calendarEl = document.getElementById('calendar');
+        let calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            aspectRatio: 2
+            
+        });
+        
+        calendar.render();
+    });
+
+
+</script>
+
+<div id="calendar"></div>
+
+
+
 

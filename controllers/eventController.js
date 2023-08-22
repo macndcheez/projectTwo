@@ -19,9 +19,6 @@ router.get('/', async (req, res) => {
      })
 })
 
-
-
-
 router.get('/new', async (req, res) => {
     let events = await Event.find();
     res.render('events/new.ejs', {
@@ -44,7 +41,7 @@ router.post('/new', async (req, res) => {
     let eventId = nanoid()
 
 
-    res.redirect(`/events/${eventId}`)
+    res.redirect(`/events/${eventId}?calendarDuration=${durationMonths}`)
 });
 
 // router.get('/seed', async (req, res) => {
@@ -58,11 +55,17 @@ router.post('/new', async (req, res) => {
 //     ])
 // })
 
-
-
 router.get('/:eventId', async (req, res) => {
-    const event = await Event.findById(req.params.eventId);
-    res.render('events/show', { event })
+    // const eventId = req.params.eventId;
+    const calendarDuration = req.params.eventId;
+    res.render('events/index', {
+        calendarDuration
+    })
 })
 
 module.exports = router;
+
+
+
+
+

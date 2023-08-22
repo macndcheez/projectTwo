@@ -1,1 +1,38 @@
+<script defer src="https://cdn.jsdelivr.net/npm/@fullcalendar/core/main.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid/main.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/@fullcalendar/interaction/main.js"></script>
+<script defer src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js'></script>
+
 <h1>Start planning your event!</h1>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        let calendarEl = document.getElementById('calendar');
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const calendarDuration = parseInt(urlParams.get('calendarDuration'));
+
+        const currentDate = new Date();
+
+        let initialView = 'dayGridMonth'
+
+        if (calendarDuration >=3 && calendarDuration <6) {
+            initialView = 'dayGridMonth'
+        } else if (calendarDuration >= 6 && calendarDuration < 12) {
+            initialView = 'dayGridMonth'
+        }
+
+        let calendar = new FullCalendar.Calendar(calendarEl, {
+            headerToolBar: {center: 'dayGridMonth, timeGridWeek'},
+            initialView: initialView,
+            validRange: {
+                start: currentDate,
+                end: new Date(currentDate.getFullYear(), currentDate.getMonth() + calendarDuration)
+            }
+        })
+        calendar.render();
+    })
+    
+</script>
+
+<div id="calendar"></div>
